@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="pt-BR" style="--bg1: #07060a; --bg2: #120a18; --bg3: #1a1024; --bg4: #26143a; --bg-angle: 145deg; --accent1: #ff4ecd; --accent2: #9b5cff; --accent3: #5d7cff; --text: #fff8ff; --outline: rgba(255, 78, 205, 0.24); --page-overlay: radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0,0,0,.56) 100%); --font-family: &#39;Trebuchet MS&#39;, Arial, sans-serif; --button-width: 360px; --button-height: 82px; --button-radius: 999px; --button-font-size: 24px; --button-weight: 900; --button-transform: uppercase; --button-spacing: 1px; --button-border-width: 2px; --button-border-style: solid; --button-rotate: 0deg; --button-padding: 18px 28px; --button-shadow: 0 0 41px rgba(255, 78, 205, 0.32), 0 0 53px rgba(155, 92, 255, 0.22), 0 30px 76px rgba(0,0,0,.60); --button-bg: linear-gradient(135deg, #ff4ecd 0%, #9b5cff 55%, #5d7cff 100%);"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pre-sell</title>
+  
+  <!-- 🔥 UTMify - Rastreamento de vendas -->
+  <script
+    src="https://cdn.utmify.com.br/scripts/utms/latest.js"
+    data-utmify-prevent-xcod-sck
+    data-utmify-prevent-subids
+    async
+    defer
+  ></script>
+
+  <!-- 🔥 xTracky - Preservação de UTMs e webhooks -->
+  <script
+    src="https://cdn.jsdelivr.net/gh/xTracky/static@latest/utm-handler.js"
+    data-token="1ae2f34e-9b84-4f5a-abf9-8aa2c03bfaf8"
+  ></script>
+  
+  <style>
+    :root {
+      --bg1: #08070a;
+      --bg2: #120d18;
+      --bg3: #1c1327;
+      --bg4: #26183a;
+      --bg-angle: 150deg;
+
+      --accent1: #ff4ecd;
+      --accent2: #9b5cff;
+      --accent3: #5d7cff;
+
+      --text: #fff8ff;
+      --outline: rgba(255, 255, 255, 0.12);
+      --page-overlay: radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0, 0, 0, 0.56) 100%);
+      --font-family: Arial, Helvetica, sans-serif;
+
+      --button-width: 360px;
+      --button-height: 82px;
+      --button-radius: 999px;
+      --button-font-size: 24px;
+      --button-weight: 900;
+      --button-transform: uppercase;
+      --button-spacing: 1px;
+      --button-border-width: 2px;
+      --button-border-style: solid;
+      --button-rotate: 0deg;
+      --button-padding: 18px 28px;
+      --button-bg: linear-gradient(135deg, var(--accent1), var(--accent2), var(--accent3));
+      --button-shadow: 0 0 36px rgba(255,255,255,.10), 0 24px 68px rgba(0,0,0,.60);
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      width: 100%;
+      overflow: hidden;
+      background: #09090d;
+    }
+
+    body {
+      position: relative;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--font-family);
+      display: grid;
+      place-items: center;
+    }
+
+    .scene {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: linear-gradient(var(--bg-angle), var(--bg1) 0%, var(--bg2) 32%, var(--bg3) 66%, var(--bg4) 100%);
+    }
+
+    .scene::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--page-overlay);
+      pointer-events: none;
+    }
+
+    #bgLayer {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 20;
+      width: 100%;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .cta-btn {
+      position: relative;
+      width: min(var(--button-width), calc(100vw - 40px));
+      min-height: var(--button-height);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 12px;
+      padding: var(--button-padding);
+      border-radius: var(--button-radius);
+      text-decoration: none;
+      color: var(--text);
+      background: var(--button-bg);
+      border: var(--button-border-width) var(--button-border-style) var(--outline);
+      font-size: clamp(18px, 2.9vw, var(--button-font-size));
+      font-weight: var(--button-weight);
+      text-transform: var(--button-transform);
+      letter-spacing: var(--button-spacing);
+      transform: rotate(var(--button-rotate));
+      box-shadow: var(--button-shadow);
+      transition: transform .2s ease, filter .2s ease, box-shadow .25s ease;
+      overflow: hidden;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      line-height: 1;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    .cta-btn:hover {
+      transform: rotate(var(--button-rotate)) translateY(-2px) scale(1.03);
+      filter: brightness(1.06);
+    }
+
+    .cta-btn:active {
+      transform: rotate(var(--button-rotate)) scale(0.985);
+    }
+
+    .cta-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(
+        115deg,
+        transparent 0%,
+        transparent 34%,
+        rgba(255,255,255,.18) 46%,
+        transparent 58%,
+        transparent 100%
+      );
+      transform: translateX(-120%);
+      animation: shine 3.1s linear infinite;
+    }
+
+    .cta-btn::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.16);
+      pointer-events: none;
+    }
+
+    .btn-inner {
+      position: relative;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .emoji {
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,.35));
+    }
+
+    .scene-fill,
+    .orb,
+    .triangle,
+    .bar,
+    .ring,
+    .square,
+    .band,
+    .panel,
+    .mesh-line,
+    .node,
+    .cross,
+    .beam,
+    .halo,
+    .shard {
+      position: absolute;
+    }
+
+    .scene-fill { inset: 0; }
+
+    .orb {
+      border-radius: 999px;
+      filter: blur(42px);
+      opacity: .24;
+      animation: drift 16s ease-in-out infinite;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      opacity: .12;
+      filter: blur(1px);
+      animation: floatSlow 18s ease-in-out infinite;
+    }
+
+    .bar {
+      height: 2px;
+      opacity: .12;
+      transform-origin: left center;
+      animation: drift 15s ease-in-out infinite;
+      filter: blur(.4px);
+    }
+
+    .ring {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      animation: pulseRing 4s ease-in-out infinite;
+      opacity: .18;
+    }
+
+    .square {
+      border-radius: 24px;
+      opacity: .14;
+      filter: blur(2px);
+      animation: drift 15s ease-in-out infinite;
+    }
+
+    .band {
+      border-radius: 999px;
+      opacity: .28;
+      filter: blur(36px);
+      animation: drift 17s ease-in-out infinite;
+    }
+
+    .panel {
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 12px 40px rgba(0,0,0,.30);
+      opacity: .45;
+      animation: floatSlow 16s ease-in-out infinite;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .mesh-line {
+      height: 1px;
+      opacity: .14;
+      transform-origin: left center;
+      filter: blur(.2px);
+    }
+
+    .node {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      opacity: .72;
+      box-shadow: 0 0 16px currentColor;
+    }
+
+    .cross {
+      width: 42px;
+      height: 42px;
+      opacity: .15;
+      animation: pulseSoft 3.4s ease-in-out infinite;
+    }
+
+    .cross::before,
+    .cross::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      background: currentColor;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+    }
+
+    .cross::before { width: 42px; height: 2px; }
+    .cross::after { width: 2px; height: 42px; }
+
+    .beam {
+      top: -10%;
+      height: 120%;
+      filter: blur(18px);
+      opacity: .16;
+      animation: beamShift 12s ease-in-out infinite;
+    }
+
+    .halo {
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.08);
+      opacity: .14;
+      animation: pulseRing 5s ease-in-out infinite;
+      filter: blur(.3px);
+    }
+
+    .shard {
+      width: 180px;
+      height: 34px;
+      opacity: .14;
+      clip-path: polygon(0 50%, 12% 0, 100% 0, 88% 100%, 8% 100%);
+      animation: drift 16s ease-in-out infinite;
+      filter: blur(.4px);
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(140%); }
+    }
+
+    @keyframes drift {
+      0% { transform: translate3d(0,0,0) scale(1); }
+      25% { transform: translate3d(14px,-10px,0) scale(1.05); }
+      50% { transform: translate3d(-10px,10px,0) scale(.97); }
+      75% { transform: translate3d(8px,6px,0) scale(1.03); }
+      100% { transform: translate3d(0,0,0) scale(1); }
+    }
+
+    @keyframes floatSlow {
+      0%,100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-12px) rotate(2deg); }
+    }
+
+    @keyframes pulseRing {
+      0%,100% { transform: scale(1); opacity: .10; }
+      50% { transform: scale(1.08); opacity: .22; }
+    }
+
+    @keyframes pulseSoft {
+      0%,100% { transform: scale(1); opacity: .12; }
+      50% { transform: scale(1.12); opacity: .22; }
+    }
+
+    @keyframes beamShift {
+      0%,100% { transform: translateX(0px); }
+      50% { transform: translateX(12px); }
+    }
+
+    @media (max-width: 480px) {
+      .cta-btn { padding: 16px 18px; }
+      .btn-inner { gap: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene"></div>
+  <div id="bgLayer"></div>
+
+  <main class="wrap">
+    <a id="ctaButton" class="cta-btn" href="#">
+      <span class="btn-inner">
+        <span class="emoji" id="emojiLeft">➡️</span>
+        <span id="ctaText">Continuar agora</span>
+        <span class="emoji" id="emojiRight">🔘</span>
+      </span>
+    </a>
+  </main>
+
+  <script>
+    // ==========================================
+    // ⚠️ CONFIGURAÇÕES - ALTERE AQUI SE NECESSÁRIO ⚠️
+    // ==========================================
+    
+    // 🔥 URL DE REDIRECT (ALTERE AQUI O LINK DO SEU BOT OU OFERTA)
+    const BASE_REDIRECT_URL = "https://t.me/DaarkVazados1_bot";
+    
+    // 🔥 PARÂMETRO FIXO (se precisar adicionar algum parâmetro fixo como shk=xxx)
+    // Deixe vazio se não precisar
+    const FIXED_PARAMS = {
+      // shk: "n455du82"  // Descomente se precisar
+    };
+    
+    // ==========================================
+    // CAPTURA DE PARÂMETROS (NÃO ALTERAR)
+    // ==========================================
+    
+    function getAllParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const params = {};
+      
+      const paramKeys = [
+        'CampaignID', 'CreativeID', 'kwai_click_id', 'cname', 'setname', 'adname',
+        'siteid', 'lg', 'sys', 'idfa', 'os_name', 'gps_adid', 'ip_address', 
+        'user_agent', 'device_name', 'xgo',
+        'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
+        'source', 'medium', 'campaign', 'term', 'content'
+      ];
+      
+      paramKeys.forEach(key => {
+        const value = urlParams.get(key);
+        if (value && value !== '') {
+          params[key] = value;
+          if (params[key].startsWith('__') && params[key].endsWith('__')) {
+            params[key] = '';
+          }
+        }
+      });
+      
+      return params;
+    }
+
+    function getCampaignName() {
+      const params = getAllParams();
+      
+      console.log('📊 Parâmetros detectados:', params);
+      
+      const possibleNames = [
+        params.cname,
+        params.CampaignID,
+        params.campaign,
+        params.utm_campaign,
+        params.source,
+        params.utm_source
+      ];
+      
+      for (let i = 0; i < possibleNames.length; i++) {
+        const name = possibleNames[i];
+        if (name && name !== '' && !name.startsWith('__') && !name.endsWith('__')) {
+          let campaign = name;
+          campaign = campaign.substring(0, 30);
+          campaign = campaign.replace(/[^a-zA-Z0-9_\-]/g, '_');
+          console.log('🎯 Campanha detectada:', campaign);
+          return campaign;
+        }
+      }
+      
+      console.log('🎯 Usando fallback: pestykw');
+      return 'pestykw';
+    }
+
+    function buildRedirectUrl() {
+      const campaignName = getCampaignName();
+      const url = new URL(BASE_REDIRECT_URL);
+      
+      // Adiciona parâmetros fixos se existirem
+      Object.keys(FIXED_PARAMS).forEach(key => {
+        url.searchParams.set(key, FIXED_PARAMS[key]);
+      });
+      
+      // Envia campanha em múltiplos formatos
+      url.searchParams.set('cname', campaignName);
+      url.searchParams.set('CampaignID', campaignName);
+      url.searchParams.set('utm_campaign', campaignName);
+      url.searchParams.set('start', campaignName);
+      
+      // Captura TODOS os parâmetros da URL atual
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      const paramsToKeep = [
+        'CampaignID', 'CreativeID', 'kwai_click_id', 'cname', 'setname', 'adname',
+        'siteid', 'lg', 'sys', 'idfa', 'os_name', 'gps_adid', 'ip_address', 
+        'user_agent', 'device_name', 'xgo',
+        'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id',
+        'source', 'medium', 'campaign', 'term', 'content',
+        'fbclid', 'ttclid', 'gclid', 'msclkid'
+      ];
+      
+      paramsToKeep.forEach(param => {
+        const value = urlParams.get(param);
+        if (value && value !== '' && !value.startsWith('__') && !value.endsWith('__')) {
+          if (!['cname', 'CampaignID', 'utm_campaign', 'start'].includes(param)) {
+            url.searchParams.set(param, value);
+          }
+        }
+      });
+      
+      console.log('🔗 URL FINAL:', url.toString());
+      console.log('📌 Campanha:', campaignName);
+      
+      return url.toString();
+    }
+
+    function updateButtonLink() {
+      const button = document.getElementById('ctaButton');
+      if (button) {
+        button.href = buildRedirectUrl();
+      }
+    }
+
+    function doRedirect() {
+      window.location.href = buildRedirectUrl();
+    }
+
+    // ==========================================
+    // SCRIPT DE EMOJIS E VARIAÇÃO DE TEXTO
+    // ==========================================
+    const CTAS = [
+      "Clique aqui", "Acessar agora", "Continuar agora", "Abrir agora",
+      "Prosseguir", "Entrar agora", "Seguir agora", "Liberar acesso",
+      "Ver agora", "Ir para a página", "Quero continuar", "Abrir conteúdo",
+      "Acessar página", "Ir agora", "Continuar para o site", "Seguir adiante",
+      "Abrir acesso", "Ver Conteudo", "Prosseguir agora", "Avançar"
+    ];
+
+    const EMOJIS = ["👉", "👇", "➡️", "✅", "🟢", "☑️", "▶️", "⬇️", "🔘", "✔️", "➜", "➤"];
+
+    const UNIVERSES = [
+      {
+        id: "velvet-magenta",
+        scene: "velvetOrbs",
+        bg: ["#07060a", "#120a18", "#1a1024", "#26143a"],
+        accent: ["#ff4ecd", "#9b5cff", "#5d7cff"],
+        text: "#fff8ff",
+        outline: "rgba(255, 78, 205, 0.24)",
+        bgAngle: "145deg",
+        btnAngle: "135deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0,0,0,.56) 100%)",
+        font: "'Trebuchet MS', Arial, sans-serif",
+        button: { width: "360px", height: "82px", radius: "999px", fontSize: "24px", weight: "900", transform: "uppercase", spacing: "1px", borderWidth: "2px", borderStyle: "solid", rotate: "0deg", padding: "18px 28px" }
+      },
+      {
+        id: "cyber-ultraviolet",
+        scene: "cyberGrid",
+        bg: ["#05070e", "#0c1220", "#151a32", "#221f46"],
+        accent: ["#5b8cff", "#8f5cff", "#ff4fc3"],
+        text: "#f7fbff",
+        outline: "rgba(91, 140, 255, 0.24)",
+        bgAngle: "160deg",
+        btnAngle: "122deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 56%, rgba(0,0,0,.54) 100%)",
+        font: "Verdana, Geneva, sans-serif",
+        button: { width: "338px", height: "78px", radius: "22px", fontSize: "22px", weight: "800", transform: "uppercase", spacing: "1.4px", borderWidth: "2px", borderStyle: "solid", rotate: "-0.4deg", padding: "18px 24px" }
+      },
+      {
+        id: "diagonal-crimson",
+        scene: "diagonalBars",
+        bg: ["#090607", "#180a12", "#27101d", "#34141b"],
+        accent: ["#ff4d6d", "#ff6b6b", "#ff8a3d"],
+        text: "#fff7f9",
+        outline: "rgba(255, 77, 109, 0.24)",
+        bgAngle: "148deg",
+        btnAngle: "140deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 52%, rgba(0,0,0,.58) 100%)",
+        font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        button: { width: "384px", height: "84px", radius: "36px", fontSize: "24px", weight: "900", transform: "none", spacing: ".6px", borderWidth: "2px", borderStyle: "solid", rotate: "-0.7deg", padding: "18px 28px" }
+      },
+      {
+        id: "prism-amethyst",
+        scene: "prismTriangles",
+        bg: ["#06060c", "#100d1b", "#19122b", "#24183d"],
+        accent: ["#c94dff", "#ff5cc8", "#6a7dff"],
+        text: "#fdf8ff",
+        outline: "rgba(201, 77, 255, 0.24)",
+        bgAngle: "150deg",
+        btnAngle: "150deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0,0,0,.60) 100%)",
+        font: "Tahoma, Arial, sans-serif",
+        button: { width: "320px", height: "74px", radius: "18px", fontSize: "21px", weight: "800", transform: "uppercase", spacing: "1px", borderWidth: "3px", borderStyle: "double", rotate: "0.5deg", padding: "16px 22px" }
+      },
+      {
+        id: "echo-neon-blue",
+        scene: "echoRings",
+        bg: ["#05070b", "#0b1220", "#111b31", "#172548"],
+        accent: ["#4ea1ff", "#6e73ff", "#c95cff"],
+        text: "#f5fbff",
+        outline: "rgba(78, 161, 255, 0.24)",
+        bgAngle: "165deg",
+        btnAngle: "132deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 56%, rgba(0,0,0,.54) 100%)",
+        font: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        button: { width: "372px", height: "88px", radius: "999px", fontSize: "23px", weight: "900", transform: "none", spacing: ".4px", borderWidth: "2px", borderStyle: "solid", rotate: "0deg", padding: "20px 28px" }
+      },
+      {
+        id: "noir-rose",
+        scene: "softSquares",
+        bg: ["#070608", "#110b13", "#1b0f1b", "#25121f"],
+        accent: ["#ff6fae", "#ff4d8d", "#7f5cff"],
+        text: "#fff7fb",
+        outline: "rgba(255, 111, 174, 0.24)",
+        bgAngle: "145deg",
+        btnAngle: "138deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0,0,0,.58) 100%)",
+        font: "Arial, Helvetica, sans-serif",
+        button: { width: "330px", height: "78px", radius: "26px", fontSize: "22px", weight: "800", transform: "none", spacing: ".3px", borderWidth: "1px", borderStyle: "solid", rotate: "0.8deg", padding: "18px 24px" }
+      },
+      {
+        id: "aurora-sunset",
+        scene: "auroraBands",
+        bg: ["#08060a", "#13091a", "#21112a", "#30163f"],
+        accent: ["#ff7d6b", "#ff4fd8", "#8b6cff"],
+        text: "#fff7fb",
+        outline: "rgba(255, 125, 107, 0.24)",
+        bgAngle: "210deg",
+        btnAngle: "120deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 52%, rgba(0,0,0,.60) 100%)",
+        font: "'Trebuchet MS', Arial, sans-serif",
+        button: { width: "392px", height: "90px", radius: "40px", fontSize: "25px", weight: "900", transform: "none", spacing: ".5px", borderWidth: "2px", borderStyle: "solid", rotate: "-0.5deg", padding: "20px 30px" }
+      },
+      {
+        id: "midnight-spotlight",
+        scene: "spotlightMinimal",
+        bg: ["#05060b", "#0b0f19", "#161629", "#23162e"],
+        accent: ["#5c7cff", "#ff4d6d", "#b85cff"],
+        text: "#f8f9ff",
+        outline: "rgba(92, 124, 255, 0.24)",
+        bgAngle: "170deg",
+        btnAngle: "145deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 58%, rgba(0,0,0,.50) 100%)",
+        font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        button: { width: "314px", height: "72px", radius: "999px", fontSize: "21px", weight: "900", transform: "uppercase", spacing: "1.2px", borderWidth: "2px", borderStyle: "solid", rotate: "0deg", padding: "16px 22px" }
+      },
+      {
+        id: "matrix-fuchsia",
+        scene: "matrixDots",
+        bg: ["#05050a", "#0f0c18", "#19112b", "#26153c"],
+        accent: ["#ff4fd2", "#915cff", "#4f87ff"],
+        text: "#fff8ff",
+        outline: "rgba(255, 79, 210, 0.24)",
+        bgAngle: "160deg",
+        btnAngle: "135deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 52%, rgba(0,0,0,.60) 100%)",
+        font: "Verdana, Geneva, sans-serif",
+        button: { width: "346px", height: "80px", radius: "22px", fontSize: "23px", weight: "800", transform: "uppercase", spacing: "1px", borderWidth: "2px", borderStyle: "solid", rotate: "0.3deg", padding: "18px 24px" }
+      },
+      {
+        id: "glass-ruby",
+        scene: "glassPanels",
+        bg: ["#080608", "#150b12", "#231018", "#32151d"],
+        accent: ["#ff5d7d", "#ff7e6b", "#ff4fc3"],
+        text: "#fff8fa",
+        outline: "rgba(255, 93, 125, 0.24)",
+        bgAngle: "148deg",
+        btnAngle: "130deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0,0,0,.58) 100%)",
+        font: "Tahoma, Arial, sans-serif",
+        button: { width: "378px", height: "82px", radius: "30px", fontSize: "24px", weight: "900", transform: "none", spacing: ".4px", borderWidth: "1px", borderStyle: "solid", rotate: "-0.6deg", padding: "18px 26px" }
+      },
+      {
+        id: "mesh-cobalt",
+        scene: "meshLinks",
+        bg: ["#05060a", "#0b1120", "#121937", "#1b2148"],
+        accent: ["#4f87ff", "#6c63ff", "#ff63d8"],
+        text: "#f6fbff",
+        outline: "rgba(79, 135, 255, 0.24)",
+        bgAngle: "155deg",
+        btnAngle: "146deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 56%, rgba(0,0,0,.54) 100%)",
+        font: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+        button: { width: "402px", height: "88px", radius: "999px", fontSize: "24px", weight: "900", transform: "none", spacing: ".5px", borderWidth: "2px", borderStyle: "solid", rotate: "0deg", padding: "20px 30px" }
+      },
+      {
+        id: "electric-cross",
+        scene: "neonCrosses",
+        bg: ["#06050a", "#100a18", "#1a0f28", "#27153b"],
+        accent: ["#ff4fd2", "#b05cff", "#ff5d7d"],
+        text: "#fff9ff",
+        outline: "rgba(176, 92, 255, 0.24)",
+        bgAngle: "158deg",
+        btnAngle: "138deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 50%, rgba(0,0,0,.62) 100%)",
+        font: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        button: { width: "320px", height: "74px", radius: "18px", fontSize: "21px", weight: "900", transform: "uppercase", spacing: "1.3px", borderWidth: "3px", borderStyle: "double", rotate: "0deg", padding: "16px 22px" }
+      },
+      {
+        id: "beam-inferno",
+        scene: "verticalBeams",
+        bg: ["#090607", "#15090f", "#22101a", "#311525"],
+        accent: ["#ff5e57", "#ff7c4d", "#ff4fb0"],
+        text: "#fff8f8",
+        outline: "rgba(255, 94, 87, 0.24)",
+        bgAngle: "150deg",
+        btnAngle: "126deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0,0,0,.58) 100%)",
+        font: "Arial, Helvetica, sans-serif",
+        button: { width: "388px", height: "86px", radius: "999px", fontSize: "24px", weight: "900", transform: "uppercase", spacing: "1px", borderWidth: "2px", borderStyle: "solid", rotate: "-0.3deg", padding: "18px 28px" }
+      },
+      {
+        id: "halo-amethyst",
+        scene: "radialHalos",
+        bg: ["#06060a", "#0f0d18", "#1a142a", "#281a3f"],
+        accent: ["#8a5cff", "#d15cff", "#ff69a8"],
+        text: "#fffaff",
+        outline: "rgba(138, 92, 255, 0.24)",
+        bgAngle: "165deg",
+        btnAngle: "144deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 58%, rgba(0,0,0,.52) 100%)",
+        font: "'Trebuchet MS', Arial, sans-serif",
+        button: { width: "350px", height: "80px", radius: "999px", fontSize: "22px", weight: "800", transform: "none", spacing: ".4px", borderWidth: "2px", borderStyle: "solid", rotate: "0.5deg", padding: "18px 24px" }
+      },
+      {
+        id: "obsidian-shards",
+        scene: "shardsMix",
+        bg: ["#05060a", "#0d0f17", "#181521", "#241824"],
+        accent: ["#5f7cff", "#ff4d6d", "#b55cff"],
+        text: "#f8f9ff",
+        outline: "rgba(181, 92, 255, 0.24)",
+        bgAngle: "152deg",
+        btnAngle: "132deg",
+        vignette: "radial-gradient(circle at center, transparent 0%, transparent 52%, rgba(0,0,0,.60) 100%)",
+        font: "Verdana, Geneva, sans-serif",
+        button: { width: "396px", height: "88px", radius: "34px", fontSize: "24px", weight: "900", transform: "none", spacing: ".5px", borderWidth: "2px", borderStyle: "solid", rotate: "-0.8deg", padding: "20px 28px" }
+      }
+    ];
+
+    function randomFloat() {
+      if (window.crypto && crypto.getRandomValues) {
+        const arr = new Uint32Array(1);
+        crypto.getRandomValues(arr);
+        return arr[0] / 4294967295;
+      }
+      return Math.random();
+    }
+
+    function rand(max) {
+      return Math.floor(randomFloat() * max);
+    }
+
+    function pick(arr) {
+      return arr[rand(arr.length)];
+    }
+
+    function hexToRgba(hex, alpha) {
+      let h = hex.replace("#", "");
+      if (h.length === 3) {
+        h = h.split("").map(c => c + c).join("");
+      }
+      const r = parseInt(h.substring(0, 2), 16);
+      const g = parseInt(h.substring(2, 4), 16);
+      const b = parseInt(h.substring(4, 6), 16);
+      return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    }
+
+    function setVar(name, value) {
+      document.documentElement.style.setProperty(name, value);
+    }
+
+    function getRecent(key) {
+      try {
+        return JSON.parse(localStorage.getItem(key) || "[]");
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function pushRecent(key, value, limit) {
+      const current = getRecent(key).filter(v => v !== value);
+      current.unshift(value);
+      localStorage.setItem(key, JSON.stringify(current.slice(0, limit)));
+    }
+
+    function chooseWithoutRecent(arr, recent, keyFn = item => item) {
+      const filtered = arr.filter(item => !recent.includes(keyFn(item)));
+      return filtered.length ? pick(filtered) : pick(arr);
+    }
+
+    function createDiv(className, styles = {}) {
+      const el = document.createElement("div");
+      el.className = className;
+      Object.assign(el.style, styles);
+      return el;
+    }
+
+    function setMask(el, value) {
+      el.style.maskImage = value;
+      el.style.webkitMaskImage = value;
+    }
+
+    function applyUniverse(universe) {
+      setVar("--bg1", universe.bg[0]);
+      setVar("--bg2", universe.bg[1]);
+      setVar("--bg3", universe.bg[2]);
+      setVar("--bg4", universe.bg[3]);
+      setVar("--bg-angle", universe.bgAngle);
+
+      setVar("--accent1", universe.accent[0]);
+      setVar("--accent2", universe.accent[1]);
+      setVar("--accent3", universe.accent[2]);
+
+      setVar("--text", universe.text);
+      setVar("--outline", universe.outline);
+      setVar("--page-overlay", universe.vignette);
+      setVar("--font-family", universe.font);
+
+      setVar("--button-width", universe.button.width);
+      setVar("--button-height", universe.button.height);
+      setVar("--button-radius", universe.button.radius);
+      setVar("--button-font-size", universe.button.fontSize);
+      setVar("--button-weight", universe.button.weight);
+      setVar("--button-transform", universe.button.transform);
+      setVar("--button-spacing", universe.button.spacing);
+      setVar("--button-border-width", universe.button.borderWidth);
+      setVar("--button-border-style", universe.button.borderStyle);
+      setVar("--button-rotate", universe.button.rotate);
+      setVar("--button-padding", universe.button.padding);
+
+      const shadowA = hexToRgba(universe.accent[0], 0.32);
+      const shadowB = hexToRgba(universe.accent[1], 0.22);
+      const shadowC = "rgba(0,0,0,.60)";
+
+      setVar(
+        "--button-shadow",
+        "0 0 " + (28 + rand(24)) + "px " + shadowA + ", 0 0 " + (48 + rand(40)) + "px " + shadowB + ", 0 " + (18 + rand(14)) + "px " + (54 + rand(24)) + "px " + shadowC
+      );
+
+      setVar(
+        "--button-bg",
+        "linear-gradient(" + universe.btnAngle + ", " + universe.accent[0] + " 0%, " + universe.accent[1] + " 55%, " + universe.accent[2] + " 100%)"
+      );
+    }
+
+    function addAmbientGlows(layer, universe) {
+      const positions = [
+        { left: "18%", top: "22%" },
+        { left: "78%", top: "70%" },
+        { left: "54%", top: "48%" }
+      ];
+
+      positions.forEach((pos, index) => {
+        const color = universe.accent[index % universe.accent.length];
+        const size = 220 + rand(180);
+        layer.appendChild(createDiv("orb", {
+          width: size + "px",
+          height: size + "px",
+          left: pos.left,
+          top: pos.top,
+          background: color,
+          opacity: (0.12 + randomFloat() * 0.10).toFixed(2),
+          filter: "blur(" + (44 + rand(26)) + "px)",
+          animationDuration: (12 + rand(8)) + "s",
+          animationDelay: (-rand(8)) + "s"
+        }));
+      });
+    }
+
+    function buildVelvetOrbs(layer, universe) {
+      const count = 7 + rand(6);
+      for (let i = 0; i < count; i++) {
+        const size = 110 + rand(220);
+        layer.appendChild(createDiv("orb", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(96) + "%",
+          top: rand(96) + "%",
+          background: pick(universe.accent),
+          opacity: (0.12 + randomFloat() * 0.14).toFixed(2),
+          filter: "blur(" + (36 + rand(28)) + "px)",
+          animationDuration: (12 + rand(10)) + "s",
+          animationDelay: (-rand(10)) + "s"
+        }));
+      }
+    }
+
+    function buildCyberGrid(layer, universe) {
+      const grid = createDiv("scene-fill", {
+        backgroundImage:
+          "linear-gradient(" + hexToRgba(universe.accent[0], 0.12) + " 1px, transparent 1px), linear-gradient(90deg, " + hexToRgba(universe.accent[1], 0.10) + " 1px, transparent 1px)",
+        backgroundSize: (34 + rand(18)) + "px " + (34 + rand(18)) + "px",
+        opacity: ".18"
+      });
+      setMask(grid, "radial-gradient(circle at center, black 30%, transparent 82%)");
+      layer.appendChild(grid);
+
+      for (let i = 0; i < 5 + rand(4); i++) {
+        const size = 90 + rand(160);
+        layer.appendChild(createDiv("orb", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(96) + "%",
+          top: rand(96) + "%",
+          background: pick(universe.accent),
+          opacity: (0.10 + randomFloat() * 0.10).toFixed(2),
+          filter: "blur(" + (28 + rand(22)) + "px)",
+          animationDuration: (10 + rand(8)) + "s"
+        }));
+      }
+    }
+
+    function buildDiagonalBars(layer, universe) {
+      const stripes = createDiv("scene-fill", {
+        backgroundImage: "repeating-linear-gradient(135deg, " + hexToRgba(universe.accent[1], 0.12) + " 0px, " + hexToRgba(universe.accent[1], 0.12) + " 2px, transparent 2px, transparent 22px)",
+        opacity: ".16"
+      });
+      setMask(stripes, "radial-gradient(circle at center, black 30%, transparent 82%)");
+      layer.appendChild(stripes);
+
+      for (let i = 0; i < 9 + rand(6); i++) {
+        layer.appendChild(createDiv("bar", {
+          width: (120 + rand(260)) + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          background: pick(universe.accent),
+          transform: "rotate(" + (120 + rand(40)) + "deg)",
+          boxShadow: "0 0 14px " + pick(universe.accent)
+        }));
+      }
+    }
+
+    function buildPrismTriangles(layer, universe) {
+      const count = 12 + rand(10);
+      for (let i = 0; i < count; i++) {
+        const size = 26 + rand(120);
+        layer.appendChild(createDiv("triangle", {
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          borderLeft: (size / 2) + "px solid transparent",
+          borderRight: (size / 2) + "px solid transparent",
+          borderBottom: size + "px solid " + pick(universe.accent),
+          transform: "rotate(" + rand(360) + "deg)",
+          animationDuration: (14 + rand(10)) + "s"
+        }));
+      }
+    }
+
+    function buildEchoRings(layer, universe) {
+      const count = 8 + rand(8);
+      for (let i = 0; i < count; i++) {
+        const size = 90 + rand(260);
+        layer.appendChild(createDiv("ring", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          borderColor: hexToRgba(pick(universe.accent), 0.24),
+          animationDuration: (2.8 + randomFloat() * 3.5).toFixed(2) + "s",
+          animationDelay: (-randomFloat() * 2).toFixed(2) + "s"
+        }));
+      }
+    }
+
+    function buildSoftSquares(layer, universe) {
+      const count = 10 + rand(8);
+      for (let i = 0; i < count; i++) {
+        const size = 36 + rand(120);
+        layer.appendChild(createDiv("square", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          background: pick(universe.accent),
+          transform: "rotate(" + rand(45) + "deg)",
+          filter: "blur(" + (1 + rand(8)) + "px)",
+          opacity: (0.08 + randomFloat() * 0.10).toFixed(2),
+          animationDuration: (12 + rand(9)) + "s"
+        }));
+      }
+    }
+
+    function buildAuroraBands(layer, universe) {
+      const count = 4 + rand(3);
+      for (let i = 0; i < count; i++) {
+        layer.appendChild(createDiv("band", {
+          width: (70 + rand(50)) + "%",
+          height: (120 + rand(100)) + "px",
+          left: (rand(60) - 10) + "%",
+          top: rand(90) + "%",
+          background: "linear-gradient(" + rand(180) + "deg, " + hexToRgba(universe.accent[0], 0.55) + " 0%, " + hexToRgba(universe.accent[1], 0.45) + " 50%, " + hexToRgba(universe.accent[2], 0.42) + " 100%)",
+          transform: "rotate(" + (rand(50) - 25) + "deg)",
+          animationDuration: (14 + rand(8)) + "s"
+        }));
+      }
+    }
+
+    function buildSpotlightMinimal(layer, universe) {
+      const spotA = createDiv("scene-fill", {
+        background: "radial-gradient(circle at 24% 22%, " + hexToRgba(universe.accent[0], 0.20) + " 0%, transparent 24%)",
+        filter: "blur(10px)"
+      });
+      const spotB = createDiv("scene-fill", {
+        background: "radial-gradient(circle at 78% 70%, " + hexToRgba(universe.accent[1], 0.18) + " 0%, transparent 26%)",
+        filter: "blur(10px)"
+      });
+      const spotC = createDiv("scene-fill", {
+        background: "radial-gradient(circle at 50% 50%, " + hexToRgba(universe.accent[2], 0.10) + " 0%, transparent 20%)",
+        filter: "blur(8px)"
+      });
+
+      layer.appendChild(spotA);
+      layer.appendChild(spotB);
+      layer.appendChild(spotC);
+
+      for (let i = 0; i < 3 + rand(3); i++) {
+        const size = 180 + rand(180);
+        layer.appendChild(createDiv("ring", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          borderColor: hexToRgba(pick(universe.accent), 0.16),
+          animationDuration: (4 + randomFloat() * 3).toFixed(2) + "s"
+        }));
+      }
+    }
+
+    function buildMatrixDots(layer, universe) {
+      const dots = createDiv("scene-fill", {
+        backgroundImage: "radial-gradient(" + hexToRgba(universe.accent[1], 0.44) + " 0.8px, transparent 0.8px)",
+        backgroundSize: (14 + rand(10)) + "px " + (14 + rand(10)) + "px",
+        opacity: ".16"
+      });
+      setMask(dots, "radial-gradient(circle at center, black 24%, transparent 80%)");
+      layer.appendChild(dots);
+
+      for (let i = 0; i < 6 + rand(5); i++) {
+        const size = 70 + rand(130);
+        layer.appendChild(createDiv("orb", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          background: pick(universe.accent),
+          opacity: (0.08 + randomFloat() * 0.08).toFixed(2),
+          filter: "blur(" + (20 + rand(18)) + "px)"
+        }));
+      }
+    }
+
+    function buildGlassPanels(layer, universe) {
+      const count = 7 + rand(6);
+      for (let i = 0; i < count; i++) {
+        layer.appendChild(createDiv("panel", {
+          width: (80 + rand(180)) + "px",
+          height: (60 + rand(140)) + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          transform: "rotate(" + (rand(50) - 25) + "deg)",
+          borderColor: hexToRgba(pick(universe.accent), 0.18),
+          background: "linear-gradient(145deg, " + hexToRgba(pick(universe.accent), 0.08) + ", rgba(255,255,255,0.02))",
+          animationDuration: (13 + rand(8)) + "s",
+          animationDelay: (-rand(8)) + "s"
+        }));
+      }
+    }
+
+    function buildMeshLinks(layer, universe) {
+      const points = [];
+      const total = 8 + rand(4);
+
+      for (let i = 0; i < total; i++) {
+        const x = 10 + rand(80);
+        const y = 10 + rand(80);
+        const color = pick(universe.accent);
+        points.push({ x, y, color });
+      }
+
+      for (let i = 0; i < points.length; i++) {
+        const point = points[i];
+        layer.appendChild(createDiv("node", {
+          left: point.x + "%",
+          top: point.y + "%",
+          color: point.color,
+          background: point.color
+        }));
+
+        const next = points[(i + 1) % points.length];
+        const dx = next.x - point.x;
+        const dy = next.y - point.y;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+
+        layer.appendChild(createDiv("mesh-line", {
+          left: point.x + "%",
+          top: point.y + "%",
+          width: length + "%",
+          background: hexToRgba(point.color, 0.26),
+          transform: "rotate(" + angle + "deg)"
+        }));
+      }
+    }
+
+    function buildNeonCrosses(layer, universe) {
+      const count = 9 + rand(8);
+      for (let i = 0; i < count; i++) {
+        const size = 28 + rand(30);
+        layer.appendChild(createDiv("cross", {
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          color: pick(universe.accent),
+          width: size + "px",
+          height: size + "px",
+          animationDuration: (2.8 + randomFloat() * 2.4).toFixed(2) + "s"
+        }));
+      }
+    }
+
+    function buildVerticalBeams(layer, universe) {
+      const count = 5 + rand(4);
+      for (let i = 0; i < count; i++) {
+        layer.appendChild(createDiv("beam", {
+          width: (40 + rand(80)) + "px",
+          left: rand(100) + "%",
+          background: "linear-gradient(180deg, transparent 0%, " + hexToRgba(pick(universe.accent), 0.55) + " 30%, " + hexToRgba(pick(universe.accent), 0.18) + " 70%, transparent 100%)",
+          animationDuration: (8 + rand(8)) + "s"
+        }));
+      }
+    }
+
+    function buildRadialHalos(layer, universe) {
+      const count = 6 + rand(5);
+      for (let i = 0; i < count; i++) {
+        const size = 120 + rand(260);
+        layer.appendChild(createDiv("halo", {
+          width: size + "px",
+          height: size + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          borderColor: hexToRgba(pick(universe.accent), 0.20),
+          boxShadow: "0 0 30px " + hexToRgba(pick(universe.accent), 0.18),
+          animationDuration: (3.6 + randomFloat() * 2.8).toFixed(2) + "s"
+        }));
+      }
+    }
+
+    function buildShardsMix(layer, universe) {
+      const count = 10 + rand(8);
+      for (let i = 0; i < count; i++) {
+        layer.appendChild(createDiv("shard", {
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          background: "linear-gradient(90deg, " + hexToRgba(pick(universe.accent), 0.60) + ", " + hexToRgba(pick(universe.accent), 0.18) + ")",
+          transform: "rotate(" + rand(180) + "deg)",
+          animationDuration: (12 + rand(8)) + "s"
+        }));
+      }
+
+      for (let i = 0; i < 5 + rand(4); i++) {
+        layer.appendChild(createDiv("bar", {
+          width: (100 + rand(260)) + "px",
+          left: rand(100) + "%",
+          top: rand(100) + "%",
+          background: pick(universe.accent),
+          transform: "rotate(" + rand(180) + "deg)",
+          boxShadow: "0 0 14px " + pick(universe.accent)
+        }));
+      }
+    }
+
+    function buildScene(universe) {
+      const layer = document.getElementById("bgLayer");
+      layer.innerHTML = "";
+      addAmbientGlows(layer, universe);
+
+      if (universe.scene === "velvetOrbs") buildVelvetOrbs(layer, universe);
+      if (universe.scene === "cyberGrid") buildCyberGrid(layer, universe);
+      if (universe.scene === "diagonalBars") buildDiagonalBars(layer, universe);
+      if (universe.scene === "prismTriangles") buildPrismTriangles(layer, universe);
+      if (universe.scene === "echoRings") buildEchoRings(layer, universe);
+      if (universe.scene === "softSquares") buildSoftSquares(layer, universe);
+      if (universe.scene === "auroraBands") buildAuroraBands(layer, universe);
+      if (universe.scene === "spotlightMinimal") buildSpotlightMinimal(layer, universe);
+      if (universe.scene === "matrixDots") buildMatrixDots(layer, universe);
+      if (universe.scene === "glassPanels") buildGlassPanels(layer, universe);
+      if (universe.scene === "meshLinks") buildMeshLinks(layer, universe);
+      if (universe.scene === "neonCrosses") buildNeonCrosses(layer, universe);
+      if (universe.scene === "verticalBeams") buildVerticalBeams(layer, universe);
+      if (universe.scene === "radialHalos") buildRadialHalos(layer, universe);
+      if (universe.scene === "shardsMix") buildShardsMix(layer, universe);
+    }
+
+    function init() {
+      const recentUniverses = getRecent("recent_universes");
+      const recentCTAs = getRecent("recent_ctas");
+      const recentLeft = getRecent("recent_emojis_left");
+      const recentRight = getRecent("recent_emojis_right");
+
+      const universe = chooseWithoutRecent(UNIVERSES, recentUniverses, item => item.id);
+      const cta = chooseWithoutRecent(CTAS, recentCTAs);
+      const leftEmoji = chooseWithoutRecent(EMOJIS, recentLeft);
+      const rightEmoji = chooseWithoutRecent(EMOJIS.filter(e => e !== leftEmoji), recentRight);
+
+      applyUniverse(universe);
+      buildScene(universe);
+
+      document.getElementById("ctaText").textContent = cta;
+      document.getElementById("emojiLeft").textContent = leftEmoji;
+      document.getElementById("emojiRight").textContent = rightEmoji;
+
+      updateButtonLink();
+
+      pushRecent("recent_universes", universe.id, 5);
+      pushRecent("recent_ctas", cta, 5);
+      pushRecent("recent_emojis_left", leftEmoji, 3);
+      pushRecent("recent_emojis_right", rightEmoji, 3);
+    }
+
+    init();
+  </script>
+
+</body>
+</html>
