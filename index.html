@@ -2,58 +2,146 @@
 <html lang="pt-BR" style="--bg1: #07060a; --bg2: #120a18; --bg3: #1a1024; --bg4: #26143a; --bg-angle: 145deg; --accent1: #ff4ecd; --accent2: #9b5cff; --accent3: #5d7cff; --text: #fff8ff; --outline: rgba(255, 78, 205, 0.24); --page-overlay: radial-gradient(circle at center, transparent 0%, transparent 54%, rgba(0,0,0,.56) 100%); --font-family: 'Trebuchet MS', Arial, sans-serif; --button-width: 360px; --button-height: 82px; --button-radius: 999px; --button-font-size: 24px; --button-weight: 900; --button-transform: uppercase; --button-spacing: 1px; --button-border-width: 2px; --button-border-style: solid; --button-rotate: 0deg; --button-padding: 18px 28px; --button-shadow: 0 0 41px rgba(255, 78, 205, 0.32), 0 0 53px rgba(155, 92, 255, 0.22), 0 30px 76px rgba(0,0,0,.60); --button-bg: linear-gradient(135deg, #ff4ecd 0%, #9b5cff 55%, #5d7cff 100%);">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
 <title>Pre-sell</title>
 
-<!-- UTMify - Rastreamento de vendas -->
-<script
-  src="https://cdn.utmify.com.br/scripts/utms/latest.js"
-  data-utmify-prevent-xcod-sck
-  data-utmify-prevent-subids
-  async
-  defer
-></script>
-
-<!-- xTracky - Preservação de UTMs e webhooks -->
-<script
-  src="https://cdn.jsdelivr.net/gh/xTracky/static@latest/utm-handler.js"
-  data-token="d35dd359-4dd0-4b5f-81c9-0e5f128ce7fd"
->
-</script>
-
-<!-- Shark UTMs - Responsável por capturar e repassar TODOS os parâmetros -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- PRESSEL - Captura e repassa TODOS os parâmetros UTM        -->
+<!-- ════════════════════════════════════════════════════════════ -->
 <script>
 (function() {
-  var u = new URLSearchParams(window.location.search);
-  var KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','utm_id','fbclid','ttclid','click_id','_fbp','gclid','xcod','sck','cv','salesCode'];
-  var captured = {};
-  KEYS.forEach(function(k){ var v = u.get(k); if (v) captured[k] = v; });
-  try {
-    var saved = JSON.parse(sessionStorage.getItem('shark_utms') || '{}');
-    Object.keys(captured).forEach(function(k){ saved[k] = captured[k]; });
-    sessionStorage.setItem('shark_utms', JSON.stringify(saved));
-    captured = saved;
-  } catch(e) {}
-  function buildLink(originalHref) {
-    var url = new URL(originalHref, location.origin);
-    Object.keys(captured).forEach(function(k){
-      if (!url.searchParams.has(k)) url.searchParams.set(k, captured[k]);
+    // Captura todos os parâmetros da URL
+    var urlParams = new URLSearchParams(window.location.search);
+    
+    // Lista completa de parâmetros que o Kwai Ads pode enviar
+    var paramKeys = [
+        'utm_source',
+        'utm_medium', 
+        'utm_campaign',
+        'utm_content',
+        'utm_term',
+        'utm_id',
+        'fbclid',
+        'gclid',
+        'click_id',
+        'kwai_click_id',
+        'msclkid',
+        'ttclid',
+        '_fbp',
+        '_fbc',
+        'kwai_id',
+        'kwai_campaign',
+        'kwai_adset',
+        'kwai_ad',
+        'sck',
+        'xcod',
+        'cv',
+        'salesCode',
+        'source',
+        'medium',
+        'campaign',
+        'content',
+        'term',
+        'apx',
+        'pixel_id'
+    ];
+    
+    // Armazena os parâmetros capturados
+    var capturedParams = {};
+    var hasParams = false;
+    
+    // Primeiro, captura todos os parâmetros da lista
+    paramKeys.forEach(function(key) {
+        var value = urlParams.get(key);
+        if (value) {
+            capturedParams[key] = value;
+            hasParams = true;
+        }
     });
-    return url.toString();
-  }
-  function attach() {
-    document.querySelectorAll('a.cta-btn, a.button, a.cta, a[href*="/l/"], a[href*="/c/"], a[href*="/b/"]').forEach(function(btn){
-      btn.addEventListener('click', function(e){
-        try { btn.href = buildLink(btn.href); } catch(err) {}
-      }, { once: false, capture: true });
+    
+    // ⬇️⬇️⬇️ EXTRAI pixel_id e click_id do utm_content ⬇️⬇️⬇️
+    if (capturedParams.utm_content) {
+        var parts = capturedParams.utm_content.split('::');
+        if (parts.length === 3) {
+            // parts[0] = ADID, parts[1] = CALLBACK, parts[2] = PIXELID
+            if (!capturedParams.pixel_id) {
+                capturedParams.pixel_id = parts[2]; // __KS_PIXELID__
+                hasParams = true;
+            }
+            // Se não veio click_id separado, usa o do callback
+            if (!capturedParams.click_id && !capturedParams.kwai_click_id) {
+                capturedParams.click_id = parts[1];
+                hasParams = true;
+            }
+        }
+    }
+    // ⬆️⬆️⬆️ FIM DA EXTRACÃO ⬆️⬆️⬆️
+    
+    // Salva no sessionStorage para manter entre páginas
+    try {
+        var existing = JSON.parse(sessionStorage.getItem('pressel_utms') || '{}');
+        Object.keys(capturedParams).forEach(function(key) {
+            existing[key] = capturedParams[key];
+        });
+        sessionStorage.setItem('pressel_utms', JSON.stringify(existing));
+        capturedParams = existing;
+    } catch(e) {}
+    
+    // Função para construir URL com parâmetros
+    function buildRedirectUrl(baseUrl) {
+        try {
+            var url = new URL(baseUrl);
+            
+            // Adiciona todos os parâmetros capturados
+            Object.keys(capturedParams).forEach(function(key) {
+                if (!url.searchParams.has(key)) {
+                    url.searchParams.set(key, capturedParams[key]);
+                }
+            });
+            
+            return url.toString();
+        } catch(e) {
+            return baseUrl;
+        }
+    }
+    
+    // URL de destino
+    var DESTINATION_URL = 'https://ravenbot.com.br/l/43ade334';
+    
+    // Mostra os parâmetros capturados no console (para debug)
+    if (hasParams) {
+        console.log('📊 Parâmetros capturados pela Pressel:', capturedParams);
+        var finalUrl = buildRedirectUrl(DESTINATION_URL);
+        console.log('🔗 URL que será usada no clique:', finalUrl);
+    }
+    
+    // Função de redirecionamento (SÓ NO CLIQUE)
+    function redirectWithParams() {
+        var currentUrl = buildRedirectUrl(DESTINATION_URL);
+        window.location.href = currentUrl;
+    }
+    
+    // Aguarda o DOM carregar e adiciona evento ao botão
+    document.addEventListener('DOMContentLoaded', function() {
+        var btn = document.querySelector('.cta-btn');
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                redirectWithParams();
+            });
+        }
     });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attach);
-  } else {
-    attach();
-  }
+    
+    // Fallback: se o DOM já estiver carregado
+    if (document.readyState !== 'loading') {
+        var btn = document.querySelector('.cta-btn');
+        if (btn) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                redirectWithParams();
+            });
+        }
+    }
 })();
 </script>
 
@@ -398,7 +486,7 @@
   <div id="bgLayer"></div>
 
   <main class="wrap">
-    <a id="ctaButton" class="cta-btn" href="https://ravenbot.com.br/l/43ade334">
+    <a id="ctaButton" class="cta-btn" href="#">
       <span class="btn-inner">
         <span class="emoji" id="emojiLeft">➡️</span>
         <span id="ctaText">Continuar agora</span>
@@ -408,82 +496,6 @@
   </main>
 
   <script>
-    // ==========================================
-    // REDIRECT URL BASE
-    // ==========================================
-    const BASE_REDIRECT_URL = "https://ravenbot.com.br/l/43ade334";
-
-    // ==========================================
-    // CAPTURA DE PARÂMETROS UTM (FUNÇÃO AUXILIAR)
-    // ==========================================
-    function getUTMParams() {
-      const urlParams = new URLSearchParams(window.location.search);
-      return {
-        utm_source: urlParams.get('utm_source') || '',
-        utm_id: urlParams.get('utm_id') || '',
-        utm_campaign: urlParams.get('utm_campaign') || '',
-        utm_medium: urlParams.get('utm_medium') || '',
-        utm_content: urlParams.get('utm_content') || '',
-        utm_term: urlParams.get('utm_term') || ''
-      };
-    }
-
-    // ==========================================
-    // DEFINE O NOME DA CAMPANHA PARA O start
-    // ==========================================
-    function getCampaignName() {
-      const utms = getUTMParams();
-      
-      if (utms.utm_campaign && utms.utm_campaign !== '') {
-        let campaign = utms.utm_campaign;
-        campaign = campaign.substring(0, 30);
-        campaign = campaign.replace(/[^a-zA-Z0-9_\-]/g, '_');
-        return campaign;
-      } else if (utms.utm_id && utms.utm_id !== '') {
-        return utms.utm_id;
-      } else {
-        return 'pest#nov';
-      }
-    }
-
-    // ==========================================
-    // CONSTRÓI A URL COMPLETA COM start E UTMs
-    // ==========================================
-    function buildRedirectUrl() {
-      const campaignName = getCampaignName();
-      const url = new URL(BASE_REDIRECT_URL);
-      
-      url.searchParams.set('start', campaignName);
-      
-      const urlParams = new URLSearchParams(window.location.search);
-      const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'ttclid', 'gclid', 'msclkid'];
-      
-      utmKeys.forEach(key => {
-        const value = urlParams.get(key);
-        if (value) {
-          url.searchParams.set(key, value);
-        }
-      });
-      
-      console.log('🔗 URL de redirect final:', url.toString());
-      console.log('📊 UTMs capturadas:', getUTMParams());
-      console.log('📌 start=', campaignName);
-      
-      return url.toString();
-    }
-
-    // ==========================================
-    // ATUALIZA O LINK DO BOTÃO (Será sobrescrito pelo Shark)
-    // ==========================================
-    function updateButtonLink() {
-      const button = document.getElementById('ctaButton');
-      if (button) {
-        // O Shark UTMs vai adicionar os parâmetros automaticamente no clique
-        // Mas já deixamos o href base com start e UTMs
-        button.href = buildRedirectUrl();
-      }
-    }
-
     // ==========================================
     // SCRIPT DE EMOJIS E VARIAÇÃO DE TEXTO (MANTIDO ORIGINAL)
     // ==========================================
@@ -1181,9 +1193,6 @@
       document.getElementById("ctaText").textContent = cta;
       document.getElementById("emojiLeft").textContent = leftEmoji;
       document.getElementById("emojiRight").textContent = rightEmoji;
-
-      // ATUALIZA O LINK DO BOTÃO COM start E UTMs
-      updateButtonLink();
 
       pushRecent("recent_universes", universe.id, 5);
       pushRecent("recent_ctas", cta, 5);
